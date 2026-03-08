@@ -1,8 +1,6 @@
 # Products Service
 
-Products Service is the microservice responsible for managing the product catalog of the application.
-
-It provides product CRUD operations, search with filters, stock control, and seed data for initial testing.
+Products Service is the microservice responsible for managing the product catalog.
 
 ---
 
@@ -12,7 +10,7 @@ It provides product CRUD operations, search with filters, stock control, and see
 - TypeScript
 - Express
 - DynamoDB
-- AWS SDK v3
+- AWS SDK
 - Jest
 - Docker
 - Postman
@@ -34,19 +32,64 @@ This microservice is responsible for:
 
 ## Project Structure
 
-```bash
-products-service
-├── scripts
-├── src
-│   ├── models
-│   ├── repositories
-│   ├── services
-│   ├── utils
-│   └── app.ts
-├── tests
-│   └── unit
-├── Dockerfile
-├── jest.config.js
-├── package.json
-├── tsconfig.json
-└── Products Service API.postman_collection.json
+(products-service tree)
+
+---
+
+## Environment Variables
+
+...
+
+---
+
+## Installation
+
+...
+
+---
+
+## API Endpoints
+
+...
+
+---
+
+## Filters
+
+...
+
+---
+
+## Example Requests
+
+...
+
+---
+
+## Seed Data
+
+...
+
+---
+
+## Testing
+
+...
+
+---
+
+## Docker
+
+...
+
+---
+
+## Postman Collection
+
+...
+
+---
+
+## Notes
+
+...
