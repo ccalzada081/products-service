@@ -1,6 +1,8 @@
 # Products Service
 
-Products Service is the microservice responsible for managing the product catalog.
+Products Service is the microservice responsible for managing the product catalog of the application.
+
+It provides product CRUD operations, search with filters, stock control, and seed data for initial testing.
 
 ---
 
@@ -10,7 +12,7 @@ Products Service is the microservice responsible for managing the product catalo
 - TypeScript
 - Express
 - DynamoDB
-- AWS SDK
+- AWS SDK v3
 - Jest
 - Docker
 - Postman
@@ -32,64 +34,150 @@ This microservice is responsible for:
 
 ## Project Structure
 
-(products-service tree)
+```bash
+products-service
+├── scripts
+├── src
+│   ├── models
+│   ├── repositories
+│   ├── services
+│   ├── utils
+│   └── app.ts
+├── tests
+│   └── unit
+├── Dockerfile
+├── jest.config.js
+├── package.json
+├── tsconfig.json
+└── Products Service API.postman_collection.json
 
----
+Environment Variables
 
-## Environment Variables
+Create a .env file in the root of the project:
 
-...
+PORT=3001
+AWS_REGION=us-east-1
+PRODUCTS_TABLE=Products
+DynamoDB Table
+Table name
+Products
+Partition key
+id (String)
+Product model
+{
+  "id": "uuid",
+  "name": "Wireless Mouse",
+  "price": 25,
+  "category": "electronics",
+  "stock": 10,
+  "image": "https://via.placeholder.com/200",
+  "createdAt": "timestamp",
+  "updatedAt": "timestamp"
+}
+Installation
 
----
+Install dependencies:
 
-## Installation
+npm install
 
-...
+Run in development mode:
 
----
+npm run dev
 
-## API Endpoints
+Build project:
 
-...
+npm run build
 
----
+Run compiled version:
 
-## Filters
+npm start
+API Endpoints
+Health check
+GET /health
+Get all products
+GET /products
+Get product by ID
+GET /products/:id
+Create product
+POST /products
+Update product
+PUT /products/:id
+Decrease stock
+PUT /products/:id/stock
+Filters
 
-...
+The GET /products endpoint supports filters through query parameters.
 
----
+Filter by category
+GET /products?category=electronics
+Filter by price range
+GET /products?minPrice=20&maxPrice=200
+Filter by availability
+GET /products?available=true
+Example Requests
+Create product
+POST /products
+{
+  "name": "Wireless Mouse",
+  "price": 25,
+  "category": "electronics",
+  "stock": 10,
+  "image": "https://via.placeholder.com/200"
+}
+Update stock
+PUT /products/:id/stock
+{
+  "quantity": 2
+}
+Seed Data
 
-## Example Requests
+This project includes a seed script that inserts at least 20 sample products into DynamoDB.
 
-...
+Run:
 
----
+npm run seed
+Testing
 
-## Seed Data
+Run unit tests with coverage:
 
-...
+npm test
+Coverage
 
----
+Statements: 86%+
 
-## Testing
+Lines: 85%+
 
-...
+Branches: 88%+
 
----
+The service exceeds the required 80% unit test coverage.
 
-## Docker
+Docker
 
-...
+Build Docker image:
 
----
+docker build -t products-service .
 
-## Postman Collection
+Run container:
 
-...
+docker run -p 3001:3001 products-service
+Postman Collection
 
----
+A Postman collection is included in the repository:
 
-## Notes
+Products Service API.postman_collection.json
 
-...
+It contains:
+
+valid requests
+
+filtered requests
+
+stock update requests
+
+Notes
+
+This service stores product data in DynamoDB.
+
+Orders Service depends on this microservice to validate stock and update inventory.
+
+The stock update endpoint is used internally by Orders Service during order confirmation
